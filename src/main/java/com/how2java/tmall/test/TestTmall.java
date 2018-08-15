@@ -22,13 +22,13 @@ public class TestTmall {
                 Statement s = c.createStatement();
         )
         {
-            for (int i = 1; i <=10 ; i++) {
+            for (int i = 1; i <=21 ; i++) {
                 String sqlFormat = "insert into category values (null, '测试分类%d')";
                 String sql = String.format(sqlFormat, i);
                 s.execute(sql);
             }
 
-            System.out.println("已经成功创建10条分类测试数据");
+            System.out.println("已经成功创建分类测试数据");
 
         } catch (SQLException e) {
             // TODO Auto-generated catch block
