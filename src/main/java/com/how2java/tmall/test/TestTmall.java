@@ -23,12 +23,12 @@ public class TestTmall {
         )
         {
             for (int i = 1; i <=21 ; i++) {
-                String sqlFormat = "insert into property values (null, 1, '测试属性%d')";
-                String sql = String.format(sqlFormat, i);
+                String sqlFormat = "insert into product values (null, 5, '测试产品%d','小标题%d',132,94,80,'2018-08-06')";
+                String sql = String.format(sqlFormat, i, i);
                 s.execute(sql);
             }
 
-            System.out.println("已经成功创建分类测试数据");
+            System.out.println("已经成功创建测试数据");
 
         } catch (SQLException e) {
             // TODO Auto-generated catch block

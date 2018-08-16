@@ -11,7 +11,7 @@ public class Product {
 
     private String subTitle;
 
-    private Float originPrice;
+    private Float originalPrice;
 
     private Float promotePrice;
 
@@ -61,12 +61,12 @@ public class Product {
         this.subTitle = subTitle == null ? null : subTitle.trim();
     }
 
-    public Float getOriginPrice() {
-        return originPrice;
+    public Float getoriginalPrice() {
+        return originalPrice;
     }
 
-    public void setOriginPrice(Float originPrice) {
-        this.originPrice = originPrice;
+    public void setoriginalPrice(Float originalPrice) {
+        this.originalPrice = originalPrice;
     }
 
     public Float getPromotePrice() {

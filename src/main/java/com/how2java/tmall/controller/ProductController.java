@@ -34,4 +34,32 @@ public class ProductController {
         model.addAttribute("ps",list);
         return "admin/listProduct";
     }
+
+    @RequestMapping("admin_product_add")
+    public String add(Product product){
+        productService.add(product);
+        return "redirect:admin_product_list?cid=" + product.getCid();
+    }
+
+    @RequestMapping("admin_product_delete")
+    public String delete(int id){
+        int cid = productService.get(id).getCid();
+        productService.delete(id);
+        return "redirect:admin_product_list?cid=" + cid;
+    }
+
+    @RequestMapping("admin_product_edit")
+    public String edit(Model model, int id){
+        Product product = productService.get(id);
+//        Category category = categoryService.get(product.getCid());
+//        product.setCategory(category);
+        model.addAttribute("p", product);
+        return "admin/editProduct";
+    }
+
+    @RequestMapping("admin_product_update")
+    public String update(Product product){
+        productService.update(product);
+        return "redirect:admin_product_list?cid=" + product.getCid();
+    }
 }

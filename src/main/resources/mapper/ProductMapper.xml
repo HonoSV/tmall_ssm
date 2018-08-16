@@ -6,7 +6,7 @@
     <result column="cid" jdbcType="INTEGER" property="cid" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="subTitle" jdbcType="VARCHAR" property="subTitle" />
-    <result column="originPrice" jdbcType="REAL" property="originPrice" />
+    <result column="originalPrice" jdbcType="REAL" property="originalPrice" />
     <result column="promotePrice" jdbcType="REAL" property="promotePrice" />
     <result column="stock" jdbcType="INTEGER" property="stock" />
     <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
@@ -41,7 +41,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, cid, name, subTitle, originPrice, promotePrice, stock, createDate
+    id, cid, name, subTitle, originalPrice, promotePrice, stock, createDate
   </sql>
   <select id="selectByExample" parameterType="com.how2java.tmall.pojo.ProductExample" resultMap="BaseResultMap">
     select
@@ -70,10 +70,10 @@
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.how2java.tmall.pojo.Product" useGeneratedKeys="true">
     insert into product (cid, name, subTitle, 
-      originPrice, promotePrice, stock, 
+      originalPrice, promotePrice, stock,
       createDate)
     values (#{cid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{subTitle,jdbcType=VARCHAR}, 
-      #{originPrice,jdbcType=REAL}, #{promotePrice,jdbcType=REAL}, #{stock,jdbcType=INTEGER}, 
+      #{originalPrice,jdbcType=REAL}, #{promotePrice,jdbcType=REAL}, #{stock,jdbcType=INTEGER},
       #{createDate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.how2java.tmall.pojo.Product" useGeneratedKeys="true">
@@ -88,8 +88,8 @@
       <if test="subTitle != null">
         subTitle,
       </if>
-      <if test="originPrice != null">
-        originPrice,
+      <if test="originalPrice != null">
+        originalPrice,
       </if>
       <if test="promotePrice != null">
         promotePrice,
@@ -111,8 +111,8 @@
       <if test="subTitle != null">
         #{subTitle,jdbcType=VARCHAR},
       </if>
-      <if test="originPrice != null">
-        #{originPrice,jdbcType=REAL},
+      <if test="originalPrice != null">
+        #{originalPrice,jdbcType=REAL},
       </if>
       <if test="promotePrice != null">
         #{promotePrice,jdbcType=REAL},
@@ -137,8 +137,8 @@
       <if test="subTitle != null">
         subTitle = #{subTitle,jdbcType=VARCHAR},
       </if>
-      <if test="originPrice != null">
-        originPrice = #{originPrice,jdbcType=REAL},
+      <if test="originalPrice != null">
+        originalPrice = #{originalPrice,jdbcType=REAL},
       </if>
       <if test="promotePrice != null">
         promotePrice = #{promotePrice,jdbcType=REAL},
@@ -157,7 +157,7 @@
     set cid = #{cid,jdbcType=INTEGER},
       name = #{name,jdbcType=VARCHAR},
       subTitle = #{subTitle,jdbcType=VARCHAR},
-      originPrice = #{originPrice,jdbcType=REAL},
+      originalPrice = #{originalPrice,jdbcType=REAL},
       promotePrice = #{promotePrice,jdbcType=REAL},
       stock = #{stock,jdbcType=INTEGER},
       createDate = #{createDate,jdbcType=TIMESTAMP}
