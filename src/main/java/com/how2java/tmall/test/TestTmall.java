@@ -23,7 +23,7 @@ public class TestTmall {
         )
         {
             for (int i = 1; i <=21 ; i++) {
-                String sqlFormat = "insert into category values (null, '测试分类%d')";
+                String sqlFormat = "insert into property values (null, 1, '测试属性%d')";
                 String sql = String.format(sqlFormat, i);
                 s.execute(sql);
             }
