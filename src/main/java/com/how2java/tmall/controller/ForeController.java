@@ -208,4 +208,39 @@ public class ForeController {
         model.addAttribute("total", total);
         return "fore/buy";
     }
+
+    @RequestMapping("foreaddCart")
+    @ResponseBody
+    public String addCart(HttpSession session, Model model, int pid, int num){
+        Product p = productService.get(pid);
+        User user = (User) session.getAttribute("user");
+        List<OrderItem> ois = orderItemService.listByUser(user.getId());
+
+
+        boolean found = false;
+        for (OrderItem oi:ois){
+            if (p.getId().intValue() == oi.getProduct().getId().intValue()){
+                oi.setNumber(oi.getNumber() + num);
+                orderItemService.update(oi);
+                found = true;
+                break;
+            }
+        }
+        if (!found){
+            OrderItem orderItem = new OrderItem();
+            orderItem.setNumber(num);
+            orderItem.setUid(user.getId());
+            orderItem.setPid(pid);
+            orderItemService.add(orderItem);
+        }
+        return "success";
+    }
+
+    @RequestMapping("forecart")
+    public String cart(Model model, HttpSession session){
+        User user = (User) session.getAttribute("user");
+        List<OrderItem> ois = orderItemService.listByUser(user.getId());
+        model.addAttribute("ois", ois);
+        return "fore/cart";
+    }
 }
