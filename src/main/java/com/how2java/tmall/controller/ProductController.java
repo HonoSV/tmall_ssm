@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -37,6 +38,8 @@ public class ProductController {
 
     @RequestMapping("admin_product_add")
     public String add(Product product){
+        Date now = new Date();
+        product.setCreateDate(now);
         productService.add(product);
         return "redirect:admin_product_list?cid=" + product.getCid();
     }

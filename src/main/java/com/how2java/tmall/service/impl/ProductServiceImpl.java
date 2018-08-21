@@ -5,9 +5,7 @@ import com.how2java.tmall.pojo.Category;
 import com.how2java.tmall.pojo.Product;
 import com.how2java.tmall.pojo.ProductExample;
 import com.how2java.tmall.pojo.ProductImage;
-import com.how2java.tmall.service.CategoryService;
-import com.how2java.tmall.service.ProductImageService;
-import com.how2java.tmall.service.ProductService;
+import com.how2java.tmall.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +20,10 @@ public class ProductServiceImpl implements ProductService {
     CategoryService categoryService;
     @Autowired
     ProductImageService productImageService;
+    @Autowired
+    OrderItemService orderItemService;
+    @Autowired
+    ReviewService reviewService;
 
     public void setCategory(Product product){
         Category category = categoryService.get(product.getCid());
@@ -105,6 +107,33 @@ public class ProductServiceImpl implements ProductService {
             }
             c.setProductsByRow(productByRow);
         }
+    }
+
+    @Override
+    public void setSaleAndReviewNumber(Product product) {
+        int saleCount = orderItemService.getSaleCount(product.getId());
+        int reviewCount = reviewService.getCount(product.getId());
+
+        product.setSaleCount(saleCount);
+        product.setReviewCount(reviewCount);
+    }
+
+    @Override
+    public void setSaleAndReviewNumber(List<Product> products) {
+        for (Product each:products){
+            setSaleAndReviewNumber(each);
+        }
+    }
+
+    @Override
+    public List<Product> search(String keyword) {
+        ProductExample example = new ProductExample();
+        example.createCriteria().andNameLike("%" + keyword + "%");
+        example.setOrderByClause("id desc");
+        List<Product> result = productMapper.selectByExample(example);
+        setFirstProductImage(result);
+        setCategory(result);
+        return result;
     }
 
     public void setFirstProductImage(List<Product> list) {
